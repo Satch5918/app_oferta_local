@@ -1,87 +1,87 @@
 import React from 'react';
 
-const SocialButton = ({ provider, icon, bgColor, textColor }) => (
-  <button className={`w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm ${bgColor} ${textColor} text-sm font-medium hover:opacity-90 transition-opacity`}>
+interface SocialButtonProps {
+  provider: string;
+  icon: React.ReactNode;
+  bgColor: string;
+  textColor: string;
+  border?: boolean;
+}
+
+const SocialButton: React.FC<SocialButtonProps> = ({ provider, icon, bgColor, textColor, border }) => (
+  <button className={`w-full flex items-center justify-center px-4 py-2 rounded-md ${bgColor} ${textColor} text-sm font-medium hover:opacity-90 transition-opacity ${border ? 'border border-gray-300' : ''}`}>
     {icon}
     <span className="ml-2">Continue with {provider}</span>
   </button>
 );
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-2xl font-bold text-center mb-6">Log in or create an account</h1>
+        <h1 className="text-2xl  text-black font-bold text-center mb-6">Sign in</h1>
         
         <form className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
             <input
               type="email"
-              id="email"
-              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Email"
+              className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-          
+          <div className="relative">
+            <input
+              type="password"
+              placeholder="Password"
+              className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+            <span className="absolute right-3 top-2 text-gray-400">👁</span>
+          </div>
+          <div className="text-right">
+            <a href="#" className="text-sm text-blue-600 hover:underline">Forgotten your password?</a>
+          </div>
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            Continue
+            Sign in
           </button>
         </form>
         
-        <div className="mt-4 text-center text-sm">
-          <p>or</p>
+        <div className="mt-6 text-center text-sm text-gray-500">
+          <p>OR</p>
         </div>
         
         <div className="mt-4 space-y-3">
           <SocialButton 
-            provider="Google"
-            bgColor="bg-white"
-            textColor="text-gray-700"
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
-                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
-                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
-                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
-                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
-              </svg>
-            }
-          />
-          
-          <SocialButton 
             provider="Facebook"
             bgColor="bg-[#1877F2]"
             textColor="text-white"
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
-                <path fill="#fff" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"/>
-                <path fill="#1877f2" d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z"/>
-              </svg>
-            }
+            icon={<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" /></svg>}
+          />
+          
+          <SocialButton 
+            provider="Google"
+            bgColor="bg-white"
+            textColor="text-gray-700"
+            border={true}
+            icon={<svg className="w-5 h-5" viewBox="0 0 24 24"><path fill="#EA4335" d="M5.266 9.765A7.077 7.077 0 0 1 12 4.909c1.69 0 3.218.6 4.418 1.582L19.91 3C17.782 1.145 15.055 0 12 0 7.27 0 3.198 2.698 1.24 6.65l4.026 3.115Z" /><path fill="#34A853" d="M16.04 18.013c-1.09.703-2.474 1.078-4.04 1.078a7.077 7.077 0 0 1-6.723-4.823l-4.04 3.067A11.965 11.965 0 0 0 12 24c2.933 0 5.735-1.043 7.834-3l-3.793-2.987Z" /><path fill="#4A90E2" d="M19.834 21c2.195-2.048 3.62-5.096 3.62-9 0-.71-.109-1.473-.272-2.182H12v4.637h6.436c-.317 1.559-1.17 2.766-2.395 3.558L19.834 21Z" /><path fill="#FBBC05" d="M5.277 14.268A7.12 7.12 0 0 1 4.909 12c0-.782.125-1.533.357-2.235L1.24 6.65A11.934 11.934 0 0 0 0 12c0 1.92.445 3.73 1.237 5.335l4.04-3.067Z" /></svg>}
           />
           
           <SocialButton 
             provider="Apple"
             bgColor="bg-black"
             textColor="text-white"
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
-                <path fill="#fff" d="M30.152,6.456c0.615-0.857,1.05-2.039,0.936-3.223c-0.984,0.06-2.163,0.736-2.856,1.616 c-0.635,0.824-1.17,2.004-1.019,3.165C28.257,8.12,29.433,7.366,30.152,6.456z"/>
-                <path fill="#fff" d="M33.373,23.413c-0.045-4.289,3.506-6.345,3.667-6.447c-1.999-2.922-5.106-3.322-6.209-3.362 c-2.623-0.274-5.151,1.559-6.487,1.559c-1.355,0-3.425-1.531-5.635-1.488c-2.879,0.045-5.559,1.697-7.035,4.275 c-3.029,5.252-0.771,12.998,2.145,17.249c1.447,2.076,3.15,4.399,5.379,4.315c2.172-0.089,2.983-1.385,5.607-1.385 c2.604,0,3.358,1.385,5.633,1.339c2.331-0.041,3.801-2.09,5.215-4.178c1.666-2.395,2.342-4.736,2.373-4.857 C38.006,30.405,33.427,28.576,33.373,23.413z"/>
-              </svg>
-            }
+            icon={<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.569 12.6254C17.597 15.652 20.2179 16.6592 20.247 16.672C20.2248 16.743 19.8282 18.1073 18.8662 19.5166C18.0345 20.7324 17.1714 21.9394 15.8117 21.9647C14.4828 21.9887 14.0473 21.1793 12.5252 21.1793C10.9911 21.1793 10.5243 21.9407 9.2636 21.9887C7.94819 22.0354 6.91203 20.6437 6.07264 19.4345C4.36014 16.9677 3.0478 12.4802 4.79698 9.39061C5.6646 7.85041 7.27885 6.8667 9.03666 6.84272C10.3147 6.81873 11.5236 7.70931 12.3315 7.70931C13.1308 7.70931 14.5651 6.6392 16.1048 6.81271C16.7989 6.84004 18.4659 7.09671 19.5323 8.81571C19.4431 8.86957 17.5461 10.0614 17.569 12.6254ZM15.0183 5.0332C15.714 4.18334 16.1824 2.9881 16.0557 1.79999C15.0102 1.84652 13.7312 2.47245 13.0122 3.30832C12.3686 4.05542 11.8109 5.28349 11.9604 6.43921C13.1252 6.53784 14.3071 5.87572 15.0183 5.0332Z" /></svg>}
           />
         </div>
-        
-        <p className="mt-4 text-xs text-center text-gray-500">
-          By continuing, you agree to the updated{' '}
-          <a href="#" className="text-blue-600 hover:underline">Terms of Sale</a>,{' '}
-          <a href="#" className="text-blue-600 hover:underline">Terms of Service</a>,
-          and <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>.
-        </p>
+
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">Don't have an account?</p>
+          <a href="#" className="mt-2 inline-block text-blue-600 hover:underline">Create an account</a>
+        </div>
       </div>
     </div>
   );
